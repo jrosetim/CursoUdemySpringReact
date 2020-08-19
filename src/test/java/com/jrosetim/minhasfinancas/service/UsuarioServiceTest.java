@@ -1,12 +1,8 @@
 package com.jrosetim.minhasfinancas.service;
 
-
-import static org.hamcrest.CoreMatchers.nullValue;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.util.Optional;
 
-import org.assertj.core.api.Assert;
+import com.jrosetim.minhasfinancas.exception.AutenticacaoException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -65,25 +61,15 @@ public class UsuarioServiceTest {
 		Assertions.assertNotNull(result);
 	}
 	
-//	@Test
-//	public void autenticacaoErroUsuarioNaoEncontrado() {
-//		Assertions.assertThrows(RegraNegocioException.class, () -> {
-//			Mockito.when(usuarioRepository.findByEmail(Mockito.anyString())).thenReturn(Optional.empty());
-//			
-//			usuarioService.autenticar(emailLocal, senhaLocal);
-//		});
-//	}
-
 	@Test
 	public void autenticacaoErroUsuarioNaoEncontrado() {
-		Exception exceptionLocal =  Assertions.assertThrows(RegraNegocioException.class, () -> {
+		AutenticacaoException exceptionLocal =  Assertions.assertThrows(AutenticacaoException.class, () -> {
 			Mockito.when(usuarioRepository.findByEmail(Mockito.anyString())).thenReturn(Optional.empty());
-			
+
 			usuarioService.autenticar(emailLocal, senhaLocal);
 		});
-		 
+
 		Assertions.assertTrue(exceptionLocal.getMessage().contains("Usuário não encontrado"));
-	}	
-	
+	}
 
 }
