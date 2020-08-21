@@ -12,6 +12,8 @@ import com.jrosetim.minhasfinancas.model.UsuarioModel;
 import com.jrosetim.minhasfinancas.repository.UsuarioRepository;
 import com.jrosetim.minhasfinancas.service.UsuarioService;
 
+import javax.swing.text.html.Option;
+
 @Service
 public class UsuarioServiceImpl implements UsuarioService {
 
@@ -54,6 +56,11 @@ public class UsuarioServiceImpl implements UsuarioService {
 			throw new RegraNegocioException("Já existe usuário cadastrado com este email");
 		}
 		
+	}
+
+	@Override
+	public Optional<UsuarioModel> obertPorId(Long id) {
+		return usuarioRepository.findById(id);
 	}
 
 }
